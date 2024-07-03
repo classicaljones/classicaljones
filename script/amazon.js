@@ -1,5 +1,5 @@
-  import { products } from '../data/products.js';
-  import {cart} from '../data/cart.js';
+/*   import { products } from '../data/products.js';
+  import {cart} from '../data/cart.js'; */
   let productHtml ='';
   products.forEach((product) => {
     productHtml += `
@@ -52,7 +52,7 @@
           </button>
         </div>
     `;
-})
+});
 
   function addToCart(productId){
     
@@ -92,4 +92,4 @@
         addToCart(productId);
         updateCartQuantity();
       } );
-    }); 
+    });

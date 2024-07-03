@@ -40,7 +40,7 @@ ul{
 	position: absolute;
 	left:0;
 	bottom: -10px;
-	background-color: #e91e63;
+	background-color: rgb(255, 216, 20);
 	height: 2px;
 	box-sizing: border-box;
 	width: 50px;
@@ -79,7 +79,7 @@ ul{
 	background-color: #ffffff;
 }
 
-/*responsive*/
+
 @media(max-width: 767px){
   .footer-col{
     width: 50%;
@@ -89,6 +89,12 @@ ul{
 @media(max-width: 574px){
   .footer-col{
     width: 100%;
+	text-align: center;
+}
+
+	.footer-col h4::before{
+	left: auto;
+	width:100px;
 }
 }
 
