@@ -46,7 +46,7 @@
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary js-button-cart" data-product-name="${product.id}">
+          <button class="add-to-cart-button button-primary js-button-cart js-add-to-cart" data-product-name="${product.id}">
             Add to Cart
           </button>
         </div>
@@ -54,3 +54,9 @@
 });
 
 document.querySelector('.js-product-grid').innerHTML = productHtml;
+
+document.querySelectorAll('js-add-to-cart').forEach((button) =>{
+  button.addEventListener('click', ()=>{
+    const productId = button.dataset.productId;
+  })
+})
