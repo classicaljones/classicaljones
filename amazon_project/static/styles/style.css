@@ -8,18 +8,18 @@ body{
 	padding:0;
 	box-sizing: border-box;
 }
-.container{
+.container1{
 	max-width: 1170px;
 	margin:auto;
 }
-.row{
+.row1{
 	display: flex;
 	flex-wrap: wrap;
 }
 ul{
 	list-style: none;
 }
-.footer{
+.footers{
 	background-color: #24262b;
     padding: 70px 0;
 }
