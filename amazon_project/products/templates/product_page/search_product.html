@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %} Amazon search {{searched}} {% endblock  %}
+
+
+{% block content %}
+<br><br><br>
+<br><br>
+
+    {% if searched %}
+        <h1 class="lead">You searched For {{searched}}</h1>
+        <div class="container-md align-content-center shadow-lg">
+            {% for product in products %}
+            <div class="card shadow" style="width: 18rem; z-index: -1;">
+                <img src="{{product.image.url}}." class="card-img-top" alt="{{product.name}}" title="{{product.name}}">
+                <div class="card-body">
+                  <h5 class="card-title">{{product.name}}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><img src="{{product.star.url}}" alt=""> {{product.rating}}</li>
+                  <li class="list-group-item">${{product.price}}</li>
+                  <li class="list-group-item"><button class="add-to-cart-button button-primary">
+                    Add to Cart
+                  </button></li>
+                </ul>
+              </div>
+            {% endfor %}
+     
+        </div>
+       
+    {% else %}
+        <h1>Forget to search</h1>
+    {% endif %}
+
+
+
+ 
+
+{% endblock  %}
