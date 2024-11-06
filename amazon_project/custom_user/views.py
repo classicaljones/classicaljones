@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth import login,logout
+from django.http import HttpResponse
+from django.core.mail import send_mail
 
 # Create your views here.
 def register_view(request):
@@ -31,3 +33,11 @@ def logout_view(request):
         logout(request)
         return redirect('products:index')
     
+def simple_mail(request):
+    send_mail(
+        subject='That is  the subject',
+        message='That is my message',
+        from_email='jonesmichaelfordjour2@gmail.com',
+        recipient_list=['franciskwadwofordjour@gmail.com']
+    )
+    return HttpResponse('Message sent')

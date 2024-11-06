@@ -27,7 +27,7 @@
         </a>
       </div>
 
-      <form action="{% url "products:search" %}" method=POST>
+      <form action="{% url "products:search" %}" method=POST style="width:100%;">
         {% csrf_token %}
         <div class="amazon-header-middle-section">
           <input class="search-bar" type="text" placeholder="Search" name="searched">
@@ -36,7 +36,7 @@
             <img class="search-icon" src="/static/images/icons/search-icon.png">
           </button>
         </div>
-      </form>
+      </form >
       <div class="amazon-header-right-section">
         <a class="orders-link header-link" href="orders.html">
           <span class="returns-text">Returns</span>
