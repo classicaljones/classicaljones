@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from .models import Product
 from django.contrib.auth.decorators import login_required
+from .models import Product
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -19,4 +21,3 @@ def search(request):
         return render(request, 'product_page/search_product.html',{'searched':searched,'products':products})
     else:
         return render(request, 'product_page/search_product.html',{})
-

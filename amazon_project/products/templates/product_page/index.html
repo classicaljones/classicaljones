@@ -51,12 +51,38 @@
               Added
             </div>
 
-            <button class="add-to-cart-button button-primary">
+            <button type="button" value="{{product.id}}" id="add_cart" class="add-to-cart-button button-primary">
               Add to Cart
             </button>
           </div>
           {% endfor %}
         </div>
       </div>
-    
+
+<script>
+$(document).on('click', '#add_cart', function(e){
+  e.preventDefault();
+  $.ajax({
+    type: 'POST',
+    url: '{% url "products:index" %}',
+    data: {
+      product_id: $('#add_cart').val(),
+      csrfmiddlewaretoken:'{{ csrf_token }}',
+      action: 'post'
+    },
+    success: function(json){
+      console.log(json)
+    },
+
+    error : function(xhr,errmsg,err){
+
+    }
+
+  })
+})
+
+
+
+
+</script>
 {% endblock  %}
