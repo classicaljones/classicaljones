@@ -23,7 +23,7 @@
 
         <div class="checkout-header-middle-section">
           Checkout (<a class="return-to-home-link"
-            href="amazon.html">3 items</a>)
+            href="amazon.html">{{order.get_cart_items}} items</a>)
         </div>
 
         <div class="checkout-header-right-section">
@@ -127,10 +127,10 @@
                   {{item.product.name}}
                 </div>
                 <div class="product-price">
-                  ${{item.product.price}}
+                  ${{item.product.price|floatformat:2}}
                 </div>
                 <div class="product-price">
-                  Total: ${{item.get_total}}
+                  Total: ${{item.get_total|floatformat:2}}
                 </div>
                 <div class="product-quantity">
                   <span>
@@ -199,7 +199,7 @@
 
           <div class="payment-summary-row">
             <div>Items ({{order.get_cart_items}}):</div>
-            <div class="payment-summary-money">${{order.get_cart_total}}</div>
+            <div class="payment-summary-money">${{order.get_cart_total|floatformat:2}}</div>
           </div>
 
           <div class="payment-summary-row">
@@ -209,7 +209,7 @@
 
           <div class="payment-summary-row subtotal-row">
             <div>Total before tax:</div>
-            <div class="payment-summary-money">${{order.get_cart_total}}</div>
+            <div class="payment-summary-money">${{order.get_cart_total|floatformat:2}}</div>
           </div>
 
           <div class="payment-summary-row">
