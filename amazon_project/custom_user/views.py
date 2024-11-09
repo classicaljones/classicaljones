@@ -41,3 +41,4 @@ def simple_mail(request):
         recipient_list=['franciskwadwofordjour@gmail.com']
     )
     return HttpResponse('Message sent')
+

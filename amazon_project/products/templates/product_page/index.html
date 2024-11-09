@@ -10,7 +10,7 @@
           <div class="product-container">
             <div class="product-image-container">
               <img class="product-image"
-                src="{{product.image.url}}" title="{{product.name}}">
+                src="{{product.imageURL}}" title="{{product.name}}">
             </div>
 
             <div class="product-name limit-text-to-2-lines">
@@ -51,7 +51,7 @@
               Added
             </div>
 
-            <button type="button" value="{{product.id}}" id="add_cart" class="add-to-cart-button button-primary">
+            <button data-product={{product.id}} data-action="add" type="button" value="{{product.id}}" id="add_cart" class="add-to-cart-button button-primary update-cart" >
               Add to Cart
             </button>
           </div>
@@ -59,30 +59,5 @@
         </div>
       </div>
 
-<script>
-$(document).on('click', '#add_cart', function(e){
-  e.preventDefault();
-  $.ajax({
-    type: 'POST',
-    url: '{% url "products:index" %}',
-    data: {
-      product_id: $('#add_cart').val(),
-      csrfmiddlewaretoken:'{{ csrf_token }}',
-      action: 'post'
-    },
-    success: function(json){
-      console.log(json)
-    },
 
-    error : function(xhr,errmsg,err){
-
-    }
-
-  })
-})
-
-
-
-
-</script>
 {% endblock  %}

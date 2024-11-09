@@ -5,6 +5,8 @@ app_name = 'products'
 
 urlpatterns = [
     path('',views.index, name='index'),
-    path('checkout/',views.checkout, name='checkout'),
-    path('search/', views.search, name= 'search')
+    path('cart/',views.cart, name='cart'),
+    path('search/', views.search, name= 'search'),
+    path('checkout/',views.checkout)
+    # path('add-to-cart/<int:product_id>/',views.add_to_cart,name='add_to_cart')
 ]
