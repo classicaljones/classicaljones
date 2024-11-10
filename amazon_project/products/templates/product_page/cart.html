@@ -10,6 +10,24 @@
     <link rel="stylesheet" href="/static/styles/shared/general.css">
     <link rel="stylesheet" href="/static/styles/pages/checkout/checkout-header.css">
     <link rel="stylesheet" href="/static/styles/pages/checkout/checkout.css">
+    <script type='text/javascript'>var user = '{{request.user}}'
+      function getToken(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+      }
+      let csrftoken = getToken('csrftoken');
+  </script>
   </head>
   <body>
     <div class="checkout-header">
@@ -136,11 +154,11 @@
                   <span>
                     Quantity: <span class="quantity-label">{{item.quantity}}</span>
                   </span>
-                  <span class="update-quantity-link link-primary">
-                    Update
+                  <span data-product={{item.product.id}} data-action="add" class="update-quantity-link link-primary update-cart">
+                    Increase
                   </span>
-                  <span class="delete-quantity-link link-primary">
-                    Delete
+                  <span  data-product={{item.product.id}} data-action="remove" class="delete-quantity-link link-primary update-cart">
+                    Decrease
                   </span>
                 </div>
               </div>
@@ -204,7 +222,7 @@
 
           <div class="payment-summary-row">
             <div>Shipping &amp; handling:</div>
-            <div class="payment-summary-money">$4.99</div>
+            <div class="payment-summary-money">$0.00</div>
           </div>
 
           <div class="payment-summary-row subtotal-row">
@@ -213,18 +231,19 @@
           </div>
 
           <div class="payment-summary-row">
-            <div>Estimated tax (10%):</div>
-            <div class="payment-summary-money">$4.77</div>
+            <div>Estimated tax (0%):</div>
+            <div class="payment-summary-money">$0.00</div>
           </div>
 
           <div class="payment-summary-row total-row">
             <div>Order total:</div>
-            <div class="payment-summary-money">$52.51</div>
+            <div class="payment-summary-money">${{order.get_cart_total|floatformat:2}}</div>
           </div>
 
           <button class="place-order-button button-primary">
-            Place your order
+            <a href="{% url 'products:checkout' %}">Place your order</a>
           </button>
+          
         </div>
       </div>
       <script type="text/javascript" src="/static/scripts/cart.js"></script>
