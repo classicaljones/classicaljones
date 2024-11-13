@@ -45,7 +45,7 @@
         </div>
 
         <div class="checkout-header-right-section">
-          <img src="static/images/icons/checkout-lock-icon.png}">
+          <img src="{% static 'images/icons/checkout-lock-icon.png' %}">
         </div>
       </div>
     </div>
@@ -159,6 +159,9 @@
                   </span>
                   <span  data-product={{item.product.id}} data-action="remove" class="delete-quantity-link link-primary update-cart">
                     Decrease
+                  </span>
+                  <span  data-product={{item.product.id}} data-action="delete" class="delete-quantity-link link-primary update-cart">
+                    Delete
                   </span>
                 </div>
               </div>

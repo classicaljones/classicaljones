@@ -42,3 +42,4 @@ def simple_mail(request):
     )
     return HttpResponse('Message sent')
 
+#admin lite
