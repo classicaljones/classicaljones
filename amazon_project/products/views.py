@@ -30,7 +30,11 @@ def search(request):
     if request.method == 'POST':
         searched = request.POST['searched']
         products = Product.objects.filter(name__contains=searched)
-        return render(request, 'product_page/search_product.html',{'searched':searched,'products':products})
+        customer = request.user.customer
+        order,created = Order.objects.get_or_create(customer=customer,complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+        return render(request, 'product_page/search_product.html',{'searched':searched,'products':products,'cartItems':cartItems})
         
     else:
         return render(request, 'product_page/search_product.html',{})
