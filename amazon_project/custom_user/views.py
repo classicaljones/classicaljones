@@ -3,6 +3,10 @@ from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth import login,logout
 from django.http import HttpResponse
 from django.core.mail import send_mail
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
+
+
 
 # Create your views here.
 def register_view(request):
@@ -14,6 +18,7 @@ def register_view(request):
     else:
         form = UserCreationForm()
     return render(request,'users/register.html',{'form':form})
+
 
 def login_view(request):
     if request.method == 'POST':
