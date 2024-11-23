@@ -85,6 +85,9 @@ def favourite(request):
     context = {'items': items, 'order':order,'cartItems':cartItems}
     return render(request, 'product_page/favourite.html',context)
 
+def detail_view(request):
+    return render(request, 'product_page/detail.html')
+
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
