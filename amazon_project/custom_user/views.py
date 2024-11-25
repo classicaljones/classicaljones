@@ -5,6 +5,9 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
+from . import forms
+from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -14,10 +17,22 @@ def register_view(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             login(request,form.save())
-            return redirect('products:index')
+            return redirect('users:reg_detail')
     else:
         form = UserCreationForm()
     return render(request,'users/register.html',{'form':form})
+
+def register_detail(request):
+    if request.method == 'POST':
+        form = forms.MakeDetail(request.POST)
+        if form.is_valid():
+            detail = form.save(commit=False)
+            detail.user = request.user
+            detail.save()
+            return redirect('products:index')
+    else:    
+        form = forms.MakeDetail()
+    return render(request,'users/reg_detail.html',{'form':form})
 
 
 def login_view(request):
