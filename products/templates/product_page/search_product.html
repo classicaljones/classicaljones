@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %} Amazon search {{searched}} {% endblock  %}
+
+
+{% block content %}
+<br><br><br>
+<br><br>
+  {% if searched %}
+    <h1 class="lead">You searched For: {{searched}}</h1>
+
+    <div class="main">
+      <div class="products-grid js-product-grid">
+        {% for product in products %}  
+        <div class="product-container">
+          <div class="product-image-container">
+            <img class="product-image"
+              src="{{product.image.url}}" title="{{product.name}}">
+          </div>
+
+          <div class="product-name limit-text-to-2-lines">
+            {{product.name}}
+          </div>
+
+          <div class="product-rating-container">
+            <img class="product-rating-stars"
+              src="{{product.star.url}}"/>
+            <div class="product-rating-count link-primary">
+              {{product.rating}}
+            </div>
+          </div>
+
+          <div class="product-price">
+            ${{product.price|floatformat:2}}
+          </div>
+
+
+          <div class="product-spacer"></div>
+
+          <div class="added-to-cart">
+            <img src="images/icons/checkmark.png">
+            Added
+          </div>
+
+          <button data-product={{product.id}} data-action="add" type="button" value="{{product.id}}" id="add_cart" class="add-to-cart-button button-primary update-cart" >
+            Add to Cart
+          </button>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+       
+    {% else %}
+        <h1>Forget to search</h1>
+    {% endif %}
+
+
+{% endblock  %}

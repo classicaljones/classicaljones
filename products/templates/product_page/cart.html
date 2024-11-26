@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>Checkout</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles/shared/general.css">
+    <link rel="stylesheet" href="/static/styles/pages/checkout/checkout-header.css">
+    <link rel="stylesheet" href="/static/styles/pages/checkout/checkout.css">
+    <script type='text/javascript'>var user = '{{request.user}}'
+      function getToken(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+      }
+      let csrftoken = getToken('csrftoken');
+  </script>
+  </head>
+  <body>
+    <div class="checkout-header">
+      <div class="header-content">
+        <div class="checkout-header-left-section">
+          <a href="{% url "products:index" %}">
+            <img class="amazon-logo" src="{% static 'images/amazon-logo.png' %}">
+            <img class="amazon-mobile-logo" src="{% static 'images/amazon-mobile-logo.png' %}">
+          </a>
+        </div>
+
+        <div class="checkout-header-middle-section">
+          Checkout (<a class="return-to-home-link"
+            href="amazon.html">{{order.get_cart_items}} items</a>)
+        </div>
+
+        <div class="checkout-header-right-section">
+          <img src="{% static 'images/icons/checkout-lock-icon.png' %}">
+        </div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="page-title">Review your order</div>
+
+      <div class="checkout-grid">
+        <div class="order-summary">
+  
+          {% for item in items %}
+          <div class="cart-item-container">
+            <div class="delivery-date">
+              Delivery date: {{item.date_added}}
+            </div>
+
+            <div class="cart-item-details-grid">
+              <img class="product-image"
+                src="{{item.product.imageURL}}">
+
+              <div class="cart-item-details">
+                <div class="product-name">
+                  {{item.product.name}}
+                </div>
+                <div class="product-price">
+                  ${{item.product.price|floatformat:2}}
+                </div>
+                <div class="product-price">
+                  Total: ${{item.get_total|floatformat:2}}
+                </div>
+                <div class="product-quantity">
+                  <span>
+                    Quantity: <span class="quantity-label">{{item.quantity}}</span>
+                  </span>
+                  <span data-product={{item.product.id}} data-action="add" class="update-quantity-link link-primary update-cart">
+                    Increase
+                  </span>
+                  <span  data-product={{item.product.id}} data-action="remove" class="delete-quantity-link link-primary update-cart">
+                    Decrease
+                  </span>
+                  <span  data-product={{item.product.id}} data-action="delete" class="delete-quantity-link link-primary update-cart">
+                    Delete
+                  </span>
+                </div>
+              </div>
+
+              <div class="delivery-options">
+                <div class="delivery-options-title">
+                  Choose a delivery option:
+                </div>
+
+                <div class="delivery-option">
+                  <input type="radio" class="delivery-option-input"
+                    name="delivery-option-2">
+                  <div>
+                    <div class="delivery-option-date">
+                      Tuesday, June 21
+                    </div>
+                    <div class="delivery-option-price">
+                      FREE Shipping
+                    </div>
+                  </div>
+                </div>
+                <div class="delivery-option">
+                  <input type="radio" checked class="delivery-option-input"
+                    name="delivery-option-2">
+                  <div>
+                    <div class="delivery-option-date">
+                      Wednesday, June 15
+                    </div>
+                    <div class="delivery-option-price">
+                      $4.99 - Shipping
+                    </div>
+                  </div>
+                </div>
+                <div class="delivery-option">
+                  <input type="radio" class="delivery-option-input"
+                    name="delivery-option-2">
+                  <div>
+                    <div class="delivery-option-date">
+                      Monday, June 13
+                    </div>
+                    <div class="delivery-option-price">
+                      $9.99 - Shipping
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="payment-summary">
+          <div class="payment-summary-title">
+            Order Summary
+          </div>
+
+          <div class="payment-summary-row">
+            <div>Items ({{order.get_cart_items}}):</div>
+            <div class="payment-summary-money">${{order.get_cart_total|floatformat:2}}</div>
+          </div>
+
+          <div class="payment-summary-row">
+            <div>Shipping &amp; handling:</div>
+            <div class="payment-summary-money">$0.00</div>
+          </div>
+
+          <div class="payment-summary-row subtotal-row">
+            <div>Total before tax:</div>
+            <div class="payment-summary-money">${{order.get_cart_total|floatformat:2}}</div>
+          </div>
+
+          <div class="payment-summary-row">
+            <div>Estimated tax (0%):</div>
+            <div class="payment-summary-money">$0.00</div>
+          </div>
+
+          <div class="payment-summary-row total-row">
+            <div>Order total:</div>
+            <div class="payment-summary-money">${{order.get_cart_total|floatformat:2}}</div>
+          </div>
+
+          <button class="place-order-button button-primary">
+            <a href="{% url 'products:checkout' %}">Place your order</a>
+          </button>
+          
+        </div>
+      </div>
+      <script type="text/javascript" src="/static/scripts/cart.js"></script>
+    </div>
+  </body>
+</html>
