@@ -75,6 +75,10 @@ class OrderItem(models.Model):
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer,on_delete=models.SET_NULL, blank=True, null=True)
     order = models.ForeignKey(Order,on_delete=models.SET_NULL, blank=True, null=True)
+    first_name = models.CharField(max_length=200, null=True)
+    last_name = models.CharField(max_length=200, null=True)
+    email = models.CharField(max_length=200, null=True)
+    username = models.CharField(max_length=200, null=True)
     address = models.CharField(max_length=200, null=True)
     city = models.CharField(max_length=200, null=True)
     region = models.CharField(max_length=200, null=True)

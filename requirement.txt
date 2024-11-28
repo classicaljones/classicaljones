@@ -1,7 +1,4 @@
-asgiref==3.8.1
-certifi==2024.8.30
-charset-normalizer==3.4.0
-Django==5.1.1
+
 django-auth-remember==0.3
 django-cors-headers==4.5.0
 django-extensions==3.2.3

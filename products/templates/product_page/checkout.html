@@ -78,7 +78,7 @@
                       </div>
           
                       <div class="col-12">
-                        <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
+                        <label for="email" class="form-label">Email <span class="text-body-secondary"></span></label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
                         <div class="invalid-feedback">
                           Please enter a valid email address for shipping updates.
@@ -95,9 +95,9 @@
 
                       <div class="col-md-5">
                         <label for="country" class="form-label">Country</label>
-                        <select class="form-select" id="country" required>
+                        <select name="country" class="form-select" id="country" required>
                           <option value="">Choose...</option>
-                          <option>United States</option>
+                          <option value="ghana">Ghana</option>
                         </select>
                         <div class="invalid-feedback">
                           Please select a valid country.
@@ -105,13 +105,13 @@
                       </div>
           
                       <div class="col-md-4">
-                        <label for="state" class="form-label">State</label>
-                        <select class="form-select" id="state" required>
+                        <label for="region" name="region"  class="form-label">Region</label>
+                        <select class="form-select" id="region" required>
                           <option value="">Choose...</option>
-                          <option>California</option>
+                          <option value="ashanti">Ashanti</option>
                         </select>
                         <div class="invalid-feedback">
-                          Please provide a valid state.
+                          Please provide a valid Region.
                         </div>
                       </div>
           
@@ -141,15 +141,15 @@
           
                     <div class="my-3">
                       <div class="form-check">
-                        <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                        <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required value="credit_card">
                         <label class="form-check-label" for="credit">Credit card</label>
                       </div>
                       <div class="form-check">
-                        <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+                        <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required value="debit_card">
                         <label class="form-check-label" for="debit">Debit card</label>
                       </div>
                       <div class="form-check">
-                        <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
+                        <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required value="paypal">
                         <label class="form-check-label" for="paypal">PayPal</label>
                       </div>
                     </div>
@@ -205,26 +205,6 @@
 
 {% block script %}
 <script type="text/javascript">
-    var shipping = '{{order.shipping}}'
-    var total = '{{order.get_cart_total|floatformat:2}}' 
-    
-    if(shipping == 'False' && user != 'AnonymousUser'){
-      //Hide entire form if user is logged in and shipping is false
-      document.getElementById('form').classList.add('needs-validation');
-      //Show payment if logged in user wants to buy an item that does not require shipping
-      document.getElementById('payment-info').classList.remove('needs-validation');
-    }
-  
-    
-      document.getElementById('payment-info').addEventListener('click', function(e){
-        submitFormData()
-      })
-    
-      function submitFormData(){
-        console.log('Payment button click')
 
-      }
-    
-      console.log('hello world')
   </script>
 {% endblock  %}
