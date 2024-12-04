@@ -52,6 +52,11 @@
             <img class="buy-again-icon" src="{% static 'images/icons/buy-again.png' %}">
             <span class="buy-again-message  update-cart"  data-product={{item.product.id}} data-action="add" >Buy it again</span>
           </button>
+          <br>
+          <button class="buy-again-button button-primary">
+            <img class="buy-again-icon" src="{% static 'images/icons/buy-again.png' %}">
+            <span class="buy-again-message  update-cart"  data-product={{item.product.id}} data-action="delete" >Remove</span>
+          </button>
         </div>
 
         <div class="product-actions">
