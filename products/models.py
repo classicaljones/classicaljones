@@ -17,6 +17,7 @@ class Product(models.Model):
     image = models.ImageField(null=True,blank=True)
     star = models.ImageField(null=True,blank=True)
     rating = models.FloatField()
+    description = models.CharField(max_length=700,null=True)
 
 
     def __str__(self):

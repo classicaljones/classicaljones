@@ -41,7 +41,7 @@
 
         <div class="checkout-header-middle-section">
           Checkout (<a class="return-to-home-link"
-            href="amazon.html">{{order.get_cart_items}} items</a>)
+            href="{% url 'products:index' %}">{{order.get_cart_items}} items</a>)
         </div>
 
         <div class="checkout-header-right-section">
