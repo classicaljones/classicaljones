@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from django.http import JsonResponse
 import json
+import datetime
 # Create your views here.
 
 def index(request):
@@ -118,3 +119,36 @@ def updateItem(request):
         orderItem.delete()
     return JsonResponse('Item was added', safe=False)
 
+def processOrder(request):
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order,created = Order.objects.get_or_create(customer=customer,complete=False)
+        total = float(data['form']['total'])
+        order.transaction_id = transaction_id
+
+        if total == order.get_cart_total:
+            order.complete = True
+        order.save()
+
+        ShippingAddress.objects.create(
+            customer = customer,
+            order = order,
+            first_name = data['shipping']['first_name'],
+            last_name = data['shipping']['last_name'],
+            username = data['shipping']['username'],
+            email = data['shipping']['email'],
+            address = data['shipping']['address'],
+            city = data['shipping']['region'],
+            zipcode = data['shipping']['zip'],
+            payment_method = data['shipping']['payment_method'],
+            name_card = data['shipping']['name_card'],
+            card_number = data['shipping']['card_number'],
+            expiration = data['shipping']['expiration'],
+            cvv = data['shipping']['cvv'],
+
+        )
+        
+    return JsonResponse('payment complete', safe=False)

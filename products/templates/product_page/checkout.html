@@ -105,8 +105,8 @@
                       </div>
           
                       <div class="col-md-4">
-                        <label for="region" name="region"  class="form-label">Region</label>
-                        <select class="form-select" id="region" required>
+                        <label for="region" class="form-label">Region</label>
+                        <select name="region" class="form-select" id="region" required>
                           <option value="">Choose...</option>
                           <option value="ashanti">Ashanti</option>
                         </select>
@@ -145,7 +145,7 @@
                     <div class="row gy-3">
                       <div class="col-md-6">
                         <label for="cc-name" class="form-label">Name on card</label>
-                        <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                        <input type="text" name="card_name" class="form-control" id="cc-name" placeholder="" required>
                         <small class="text-body-secondary">Full name as displayed on card</small>
                         <div class="invalid-feedback">
                           Name on card is required
@@ -154,7 +154,7 @@
           
                       <div class="col-md-6">
                         <label for="cc-number" class="form-label">Credit card number</label>
-                        <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                        <input type="text" name="card_number" class="form-control" id="cc-number" placeholder="" required>
                         <div class="invalid-feedback">
                           Credit card number is required
                         </div>
@@ -162,7 +162,7 @@
           
                       <div class="col-md-3">
                         <label for="cc-expiration" class="form-label">Expiration</label>
-                        <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                        <input type="text" name="expiration" class="form-control" id="cc-expiration" placeholder="" required>
                         <div class="invalid-feedback">
                           Expiration date required
                         </div>
@@ -170,7 +170,7 @@
           
                       <div class="col-md-3">
                         <label for="cc-cvv" class="form-label">CVV</label>
-                        <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                        <input type="text" name="cvv" class="form-control" id="cc-cvv" placeholder="" required>
                         <div class="invalid-feedback">
                           Security code required
                         </div>
@@ -192,7 +192,75 @@
 {% endblock  %}
 
 {% block script %}
-<script type="text/javascript">
 
-  </script>
+
+<script type="text/javascript">
+  form = document.getElementById('form')
+  
+  form.addEventListener('submit', function(e){
+    e.preventDefault()
+    document.getElementById('payment-info').addEventListener('click', function(){
+      submitFormData()
+    })
+  })
+
+
+
+  total = '{{order.get_cart_total}}'
+
+
+
+  function submitFormData(){
+    var totalCompare = {
+      'total':total
+    }
+  
+    var shippingInfo = {
+      'first_name':null,
+      'last_name':null,
+      'username':null,
+      'email':null,
+      'address':null,
+      'country':null,
+      'region':null,
+      'zip':null,
+      'payment_method':null,
+      'name_card':null,
+      'card_number':null,
+      'expiration':null,
+      'cvv':null,
+      
+    }
+  
+    shippingInfo.first_name = form.firstName.value
+    shippingInfo.last_name = form.lastName.value
+    shippingInfo.username = form.username.value
+    shippingInfo.email = form.email.value
+    shippingInfo.address = form.address.value
+    shippingInfo.country = form.country.value
+    shippingInfo.region = form.region.value
+    shippingInfo.zip = form.zip.value
+    shippingInfo.payment_method = form.paymentMethod.value
+    shippingInfo.name_card = form.card_name.value
+    shippingInfo.card_number = form.card_number.value
+    shippingInfo.expiration = form.expiration.value
+    shippingInfo.cvv = form.cvv.value
+
+    var url = '/process_order/'
+    fetch(url,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'X-CSRFToken':csrftoken,
+      },
+      body:JSON.stringify({'form':totalCompare,'shipping':shippingInfo})
+    })
+    .then((response)=> response.json())
+    .then((data)=>{
+      console.log('success: ',data)
+      alert('Transaction complete')
+      window.location.href = '/'
+    })
+  }
+</script>
 {% endblock  %}
