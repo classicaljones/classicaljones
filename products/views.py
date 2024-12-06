@@ -90,6 +90,20 @@ def favourite(request):
     context = {'items': items, 'order':order,'cartItems':cartItems}
     return render(request, 'product_page/favourite.html',context)
 
+def detail(request, str):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order,created = Order.objects.get_or_create(customer=customer,complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0,'get_cart_items': 0,'shipping':False}
+        cartItems = order['get_cart_items']
+
+    product = Product.objects.get(name=str)
+    context = {'product':product,'cartItems':cartItems,'items':items}
+    return render(request, 'product_page/detail.html',context)
 
 def updateItem(request):
     data = json.loads(request.body)

@@ -12,12 +12,15 @@ class Customer(models.Model):
     
 class Product(models.Model):
     name = models.CharField(max_length=200,null=True)
+    appearance = models.CharField(max_length=100,null=True)
     price = models.FloatField()
     digital = models.BooleanField(default=False, null=True,blank=False)
     image = models.ImageField(null=True,blank=True)
     star = models.ImageField(null=True,blank=True)
     rating = models.FloatField()
-    description = models.CharField(max_length=700,null=True)
+    available = models.BooleanField(default=True, null=True,blank=False)
+    category = models.CharField(max_length=100,null=True)
+    description = models.TextField(max_length=700,null=True)
 
 
     def __str__(self):

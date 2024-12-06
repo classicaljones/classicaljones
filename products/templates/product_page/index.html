@@ -43,6 +43,7 @@
             <button data-product={{product.id}} data-action="add" type="button" value="{{product.id}}" id="add_cart" class="add-to-cart-button button-primary update-cart" >
               Add to Cart
             </button>
+            <a href="{% url 'products:detail' str=product.name %}">info</a>
           </div>
           {% endfor %}
         </div>
