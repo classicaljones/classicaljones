@@ -18,42 +18,43 @@
             <img  src = "{{product.image.url}}" alt = "shoe image">
           </div>
         </div>
+        <br>
+        <p style="font-size:1.4rem;">Related Products</p>
+        <br>
         <div class = "img-select">
+          {% for similar in related %}
           <div class = "img-item">
             <a href = "#" >
-              <img src = "{{product.image.url}}" alt = "shoe image">
+              <img src = "{{similar.image.url}}" alt = "shoe image">
             </a>
           </div>
-          <div class = "img-item">
-            <a href = "#" >
-              <img src = "{{product.image.url}}" alt = "shoe image">
-            </a>
-          </div>
-          
+         
+          {% endfor %}
         </div>
       </div>
       <!-- card right -->
       <div class = "product-content">
         <h2 class = "product-title">{{product.name}}</h2>
-        <a href = "#" class = "product-link">visit nike store</a>
         <div class = "product-rating">
             <img src="{{product.star.url}}" alt="">
           <span>Rating: {{product.rating}}</span>
         </div>
 
         <div class = "product-price">
-          <p class = "new-price">Price: <span>${{product.price}}</span></p>
+          <p class = "new-price">Price: <span>${{product.price|floatformat:2}}</span></p>
         </div>
 
         <div class = "product-detail">
           <h2>about this item: </h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p>
+          <p>{{product.description}}</p>
+
           <ul>
-            <li>Color: <span>Black</span></li>
+            <li>Color: <span>{{product.appearance}}</span></li>
+            {% if product.available == True %}
             <li>Available: <span>in stock</span></li>
-            <li>Category: <span>Shoes</span></li>
-            <li>Shipping Area: <span>All over the world</span></li>
+            {% endif %}
+            <li>Category: <span>{{product.category}}</span></li>
+            <li>Shipping Area: <span>Ghana</span></li>
             <li>Shipping Fee: <span>Free</span></li>
           </ul>
         </div>

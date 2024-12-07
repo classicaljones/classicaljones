@@ -100,9 +100,10 @@ def detail(request, str):
         items = []
         order = {'get_cart_total': 0,'get_cart_items': 0,'shipping':False}
         cartItems = order['get_cart_items']
-
+    
     product = Product.objects.get(name=str)
-    context = {'product':product,'cartItems':cartItems,'items':items}
+    related_product = Product.objects.filter(category=product.category).exclude(name=product.name)[:4]
+    context = {'product':product,'cartItems':cartItems,'items':items,'related':related_product}
     return render(request, 'product_page/detail.html',context)
 
 def updateItem(request):
