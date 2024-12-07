@@ -24,7 +24,7 @@
         <div class = "img-select">
           {% for similar in related %}
           <div class = "img-item">
-            <a href = "#" >
+            <a href = "{% url 'products:detail' str=similar.name %}" >
               <img src = "{{similar.image.url}}" alt = "shoe image">
             </a>
           </div>
