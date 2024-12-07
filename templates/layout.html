@@ -37,6 +37,8 @@
 
     
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    {% block unique %}{% endblock  %}
   </head>
   <body>
     <div class="amazon-header">
@@ -83,7 +85,7 @@
                         <li><a href="#">about us</a></li>
                         <li><a href="#">our services</a></li>
                         <li><a href="#">privacy policy</a></li>
-                        <li><a href="#">affiliate program</a></li>
+                        <li><a href="{% url 'products:portfolio' %} ">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">

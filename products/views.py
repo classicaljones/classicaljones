@@ -106,6 +106,20 @@ def detail(request, str):
     context = {'product':product,'cartItems':cartItems,'items':items,'related':related_product}
     return render(request, 'product_page/detail.html',context)
 
+def portfolio(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order,created = Order.objects.get_or_create(customer=customer,complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0,'get_cart_items': 0,'shipping':False}
+        cartItems = order['get_cart_items']
+        
+    context = {'items': items, 'order':order,'cartItems':cartItems}
+    return render(request,'product_page/portfolio.html',context)
+
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
@@ -167,3 +181,20 @@ def processOrder(request):
         )
         
     return JsonResponse('payment complete', safe=False)
+
+def contact_us(request):
+    data = json.loads(request.body)
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+
+        Contact_us.objects.create(
+            customer=customer,
+            full_name=data['contact_us']['full_name'],
+            email_address=data['contact_us']['email_address'],
+            mobile=data['contact_us']['mobile'],
+            email_subject=data['contact_us']['email_subject'],
+            messasge_info=data['contact_us']['message']
+        )
+
+    return JsonResponse('message successful', safe=False)

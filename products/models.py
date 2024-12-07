@@ -99,3 +99,10 @@ class ShippingAddress(models.Model):
         return self.username
     
 
+class Contact_us(models.Model):
+    customer = models.ForeignKey(Customer,on_delete=models.SET_NULL, blank=True, null=True)
+    full_name = models.CharField(max_length=100,null=True)
+    email_address = models.CharField(max_length=100,null=True)
+    mobile = models.CharField(max_length=100,null=True)
+    email_subject = models.CharField(max_length=100,null=True)
+    messasge_info = models.CharField(max_length=100,null=True)
