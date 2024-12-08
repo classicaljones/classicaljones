@@ -43,7 +43,7 @@
   <body>
     <div class="amazon-header">
       <div class="amazon-header-left-section">
-        <a href="{% url "products:index" %}" class="header-link">
+        <a href="{% url "products:index" %}" class="header-links">
           <img class="amazon-logo"
             src="{% static 'images/amazon-logo-white.png' %}">
           <img class="amazon-mobile-logo"
@@ -62,11 +62,11 @@
         </div>
       </form >
       <div class="amazon-header-right-section">
-        <a class="orders-link header-link" href="{% url 'products:favourite' %}">
+        <a class="orders-links header-links" href="{% url 'products:favourite' %}">
           <span class="returns-text">Favourite</span>
           <span class="orders-text"> List</span>
         </a>
-        <a class="cart-link header-link" href="{% url 'products:cart' %}">
+        <a class="cart-link header-links" href="{% url 'products:cart' %}">
           <img class="cart-icon" src="{% static 'images/icons/cart-icon.png' %}">
           <div class="cart-quantity js-cart-quantity">{{cartItems}}</div>
           <div class="cart-text">Cart</div>
@@ -82,18 +82,17 @@
                 <div class="footer-col">
                     <h4>company</h4>
                     <ul>
-                        <li><a href="{% url 'products:portfolio' %}">about us</a></li>
-                        <li><a href="{% url 'products:portfolio' %}">our services</a></li>
-                        <li><a href="#">privacy policy</a></li>
-                        <li><a href="{% url 'products:portfolio' %} ">Contact Us</a></li>
+                        <li><a href="{% url 'products:about' %}">About us</a></li>
+                        <li><a href="{% url 'products:our_service' %}">Our services</a></li>
+                        <li><a href="{% url 'products:index' %}">Home</a></li>
+                        <li><a href="{% url 'products:contact_me' %} ">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>get help</h4>
                     <ul>
                         <li><a href="#">FAQ</a></li>
-                        <li><a href="{% url 'products:checkout' %}">shipping</a></li>
-                        <li><a href="{% url 'products:cart' %}">returns</a></li>
+                        <li><a href="{% url 'products:checkout' %}">Shipping</a></li>
                         <li><a href="{% url 'products:cart' %}">order status</a></li>
                         <li><a href="{% url 'products:checkout' %}">payment options</a></li>
                     </ul>

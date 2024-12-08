@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}{% endblock  %}
+
+{% block unique %}
+<link href="http://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'styles/portfolio.css' %}">
+{% endblock  %}
+
+{% block content %}
+
+
+<section class="contact" id="contact">
+    <h2 class="heading">Contact <span>Me!</span></h2>
+
+    <form id="form">
+        <div class="input-box">
+            <input name="full_name" type="text" placeholder="Full Name" required>
+            <input name="email" type="email" placeholder="Email Address" required>
+        </div>
+
+        <div class="input-box">
+            <input name="mobile" type="number" placeholder="Mobile Number" required>
+            <input name="email_subject" type="text" placeholder="Email Subject" required>
+        </div>
+
+        <textarea name="message" id="" cols="30" row="10" placeholder="Your Message" required></textarea>
+        <input type="submit" value="Send Message" class="btn" id="contact-us">
+    </form>
+</section>
+
+<!-- footer design -->
+
+{% endblock  %}
+
+{% block script %}
+
+<script>
+
+    form = document.getElementById('form')
+  
+    form.addEventListener('submit', function(e){
+      e.preventDefault()
+      document.getElementById('contact-us').addEventListener('click', function(){
+        submitForm()
+      })
+    })
+  
+
+    function submitForm(){
+        console.log('message...')
+        let contact_us = {
+            'full_name':null,
+            'email_address':null,
+            'mobile':null,
+            'email_subject':null,
+            'message':null
+        }
+        
+        contact_us.full_name = form.full_name.value
+        contact_us.email_address = form.email.value
+        contact_us.mobile = form.mobile.value
+        contact_us.email_subject = form.email_subject.value
+        contact_us.message = form.message.value
+
+        var url = '/contact_us/'
+        fetch(url, {
+          method:'POST',
+          headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':csrftoken,
+          },
+          body:JSON.stringify({'contact_us':contact_us})
+        })
+        .then((response)=> response.json())
+        .then((data)=>{
+          console.log('success: ',data)
+          alert('Message sent')
+          window.location.href = '/'
+        })
+    }
+
+
+
+
+
+</script>
+{% endblock  %}

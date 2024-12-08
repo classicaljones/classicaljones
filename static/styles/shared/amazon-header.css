@@ -25,7 +25,7 @@
   }
 }
 
-.header-link {
+.header-links {
   display: inline-block;
   padding: 6px;
   border-radius: 2px;
@@ -34,7 +34,7 @@
   border: 1px solid rgba(0, 0, 0, 0);
 }
 
-.header-link:hover {
+.header-links:hover {
   border: 1px solid white;
 }
 
@@ -103,7 +103,7 @@
   justify-content: end;
 }
 
-.orders-link {
+.orders-links {
   color: white;
 }
 

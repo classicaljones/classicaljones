@@ -106,7 +106,7 @@ def detail(request, str):
     context = {'product':product,'cartItems':cartItems,'items':items,'related':related_product}
     return render(request, 'product_page/detail.html',context)
 
-def portfolio(request):
+def contact_me(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order,created = Order.objects.get_or_create(customer=customer,complete=False)
@@ -118,7 +118,37 @@ def portfolio(request):
         cartItems = order['get_cart_items']
         
     context = {'items': items, 'order':order,'cartItems':cartItems}
-    return render(request,'product_page/portfolio.html',context)
+    return render(request,'product_page/contact_me.html',context)
+
+
+def our_service(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order,created = Order.objects.get_or_create(customer=customer,complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0,'get_cart_items': 0,'shipping':False}
+        cartItems = order['get_cart_items']
+        
+    context = {'items': items, 'order':order,'cartItems':cartItems}
+    return render(request,'product_page/our_service.html',context)
+
+
+def about(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order,created = Order.objects.get_or_create(customer=customer,complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0,'get_cart_items': 0,'shipping':False}
+        cartItems = order['get_cart_items']
+        
+    context = {'items': items, 'order':order,'cartItems':cartItems}
+    return render(request,'product_page/about.html',context)
 
 def updateItem(request):
     data = json.loads(request.body)
