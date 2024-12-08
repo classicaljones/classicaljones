@@ -82,8 +82,8 @@
                 <div class="footer-col">
                     <h4>company</h4>
                     <ul>
-                        <li><a href="#">about us</a></li>
-                        <li><a href="#">our services</a></li>
+                        <li><a href="{% url 'products:portfolio' %}">about us</a></li>
+                        <li><a href="{% url 'products:portfolio' %}">our services</a></li>
                         <li><a href="#">privacy policy</a></li>
                         <li><a href="{% url 'products:portfolio' %} ">Contact Us</a></li>
                     </ul>
@@ -101,8 +101,8 @@
                 <div class="footer-col">
                     <h4>online shop</h4>
                     <ul>
-                        <li><a href="#">watch</a></li>
-                        <li><a href="#">bag</a></li>
+                        <li><a href="http://127.0.0.1:8000/detail_of/Women's%20Chiffon%20Beachwear%20Cover%20Up%20-%20Black">Cloth</a></li>
+                        <li><a href="http://127.0.0.1:8000/detail_of/2%20Slot%20Toaster%20-%20Black">Home appliance</a></li>
 
                         {% if user.is_authenticated %}
                         <li><form action="{% url 'users:logout' %}" method='post'>
