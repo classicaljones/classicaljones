@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 
+{% block title %}Amazon Detail{% endblock  %}
+
 {% load static %}
 
 {% block css %}
@@ -15,7 +17,7 @@
       <div class = "product-imgs">
         <div class = "img-display">
           <div class = "img-showcase">
-            <img  src = "{{product.image.url}}" alt = "shoe image">
+            <img  src = "{{product.imageURL}}" alt = "shoe image">
           </div>
         </div>
         <br>
@@ -36,8 +38,8 @@
       <div class = "product-content">
         <h2 class = "product-title">{{product.name}}</h2>
         <div class = "product-rating">
-            <img src="{{product.star.url}}" alt="">
-          <span>Rating: {{product.rating}}</span>
+            <img src="{{product.starURL}}" alt="">
+          <span>Rating: {{product.imageURL}}</span>
         </div>
 
         <div class = "product-price">

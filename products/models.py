@@ -33,6 +33,14 @@ class Product(models.Model):
         except:
             url = ''
         return url
+    
+    @property
+    def starURL(self):
+        try:
+            url = self.star.url
+        except:
+            url = ''
+        return url
 
 class Order(models.Model):
     transaction_id = models.CharField(max_length=80,null=True)
