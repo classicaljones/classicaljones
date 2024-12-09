@@ -18,8 +18,11 @@
         <h3>Hello, It's me</h3>
         <h1>Fordjour Jones Michael</h1>
         <h3>And I'm a <span class="multiple-text"></span></h3>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio ad fugit eligendi cupiditate tempora
-            quidem optio repellat amet earum nam.</p>
+        <p>Amazon is the leading in digital marketing around the globe with
+            quality and quantity sales of products. We have everything to offer you ,
+            you just ask for it. Our products are affordable and of high standard.
+            If you have any question you <a style="color:orange;" href="{% url 'products:contact_me' %}">contact us</a>.Thank you
+        </p>
         <div class="social-media">
             <a href="#"><i class="bx bxl-facebook"></i></a>
             <a href="#"><i class="bx bxl-twitter"></i></a>
@@ -31,7 +34,7 @@
 
     <div class="home-img">
         <div class="hexagon">
-            <img src="images/home.png" alt="" width="100px" height="300px">
+            <img src="{% static 'images/profile_pic.jpeg' %}" alt="" width="100px" height="300px">
         </div>
     </div>
 
@@ -41,16 +44,16 @@
 
 <section class="about" id="about">
     <div class="about-img">
-        <img src="images/about.png" alt="" height="300px">
+        <img src="{% static 'images/profile_pic.jpeg' %}" alt="profile picture" height="300px">
     </div>
 
     <div class="about-content">
         <h2 class="heading">About <span>Me</span></h2>
         <h3>Web Developer!</h3>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos necessitatibus doloribus laudantium alias
-            blanditiis, molestias ab ea ipsa nemo soluta quaerat repellendus rerum dolorem suscipit minima,
-            distinctio, autem impedit harum tenetur adipisci commodi fugit voluptates! Odit fuga fugit vel deleniti
-            consectetur reiciendis aut ex quaerat quos!</p>
+        <p>Amazon is the leading in digital marketing around the globe with
+            quality and quantity sales of products. We have everything to offer you ,
+            you just ask for it. Our products are affordable and of high standard.
+            If you have any question you <a style="color:orange;" href="{% url 'products:contact_me' %}">contact us</a>.Thank you</p>
         <a href="#" class="btn">Read More</a>
     </div>
 </section>
