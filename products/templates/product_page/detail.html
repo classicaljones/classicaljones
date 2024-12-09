@@ -60,10 +60,11 @@
         </div>
 
         <div class = "purchase-info">
-          <button data-product={{product.id}} data-action="add" type="button" value="{{product.id}}" id="add_cart" class = "btn update-cart">
+          <button data-product={{product.id}} data-action="add" type="button" value="{{product.id}}" id="add_cart" class = "btn update-cart bg-warning text-dark">
             Add to Cart <i class = "fas fa-shopping-cart"></i>
           </button>
-          <button type = "button" class = "btn">Compare</button>
+          <a class="btn bg-warning" href="{% url 'products:cart' %}">Cart</a>
+          {% comment %} <button type = "button" class = "btn">Compare</button> {% endcomment %}
         </div>
 
       </div>
